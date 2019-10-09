@@ -76,7 +76,7 @@
                                 <a href="#" class="btn btn-primary m-r-sm">SKTM Sekolah</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-info m-r-sm">Surat Keterangan Belum Menikah</a>
+                                <a href="surat_keterangan_belum_menikah_form.php" class="btn btn-info m-r-sm">Surat Keterangan Belum Menikah</a>
                             </td>
                         </tr>
                         <tr>

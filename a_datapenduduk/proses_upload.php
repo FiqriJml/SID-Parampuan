@@ -31,12 +31,13 @@ $hrf = $huruf_awal; //mulai dari kolom B (nama penduduk)
 $n=0;
 $berhasil = 0;
 
-while ($excel->getActiveSheet()->getCell('A'.$i)->getValue() != "") { //selagi ada data
+while ($excel->getActiveSheet()->getCell($huruf_awal.$i)->getValue() != "") { //selagi ada data
 	$nama = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
 	$nik = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
 	$kk = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
 	$tempat = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
-	$tanggal_lahir = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
+	// $tanggal_lahir = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
+	$tanggal_lahir = $excel->getActiveSheet()->getCell($hrf++.$i)->getFormattedValue();
 	$jenis_kelamin = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
 	$alamat = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
 	$rt = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
@@ -53,6 +54,8 @@ while ($excel->getActiveSheet()->getCell('A'.$i)->getValue() != "") { //selagi a
 	$kategori_sosial = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
 	$pekerjaan = $excel->getActiveSheet()->getCell($hrf++.$i)->getValue();
 
+	// ubah jadi string biar enak di ambil;
+	$tanggal_lahir = strval($tanggal_lahir);
 	if($nama != ""){
 		$query = "INSERT INTO `data_penduduk`(`nama`, `nik`, `kk`, `tempat`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `rt`, `rw`, `dusun`, `desa`, `kecamatan`, `agama`, `pendidikan`, `kewarganegaraan`, `status_perkawinan`, `gol_darah`, `status_sosial`, `kategori_sosial`, `pekerjaan`) VALUES ('$nama','$nik','$kk','$tempat','$tanggal_lahir','$jenis_kelamin','$alamat','$rt','$rw','$dusun','$desa','$kecamatan','$agama','$pendidikan','$kewarganegaraan','$status_perkawinan','$gol_darah','$status_sosial','$kategori_sosial','$pekerjaan')";
 
@@ -60,6 +63,7 @@ while ($excel->getActiveSheet()->getCell('A'.$i)->getValue() != "") { //selagi a
 		mysqli_query($con,$query);
 		$berhasil++;
 	}
+	echo $tanggal_lahir;
 	$i++;
 	$hrf = $huruf_awal;
 }
