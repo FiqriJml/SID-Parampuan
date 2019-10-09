@@ -60,12 +60,12 @@
                             <a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-chevron-left"></i> Kembali</a>
                         </div>
                         <div class="ibox-content">
-                            <form action="proses.php" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <form action="proses_upload.php" method="POST" class="form-horizontal" enctype="multipart/form-data">
                                 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Import File Excel</label>
                                         <div class="col-sm-10">
-                                            <input type="file" name="file" class="form-control" required="required">
+                                            <input type="file" name="file" id="file" accept=".xls,.xlsx" class="form-control" required="required">
                                         </div>
                                 </div>
                                 <div class="form-group">

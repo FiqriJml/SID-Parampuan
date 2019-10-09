@@ -63,8 +63,8 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
+                        <th>L/P</th>
                         <th>NIK</th>
-                        <th>Jenis Kelamin</th>
                         <th>KK</th>
                         <th>Alamat</th>
                         <th>Dusun</th>
@@ -89,8 +89,8 @@
                                     echo '<tr>';
                                     echo '<td>'.$no.'</td>';
                                     echo '<td>'.$data['nama'].'</td>';
-                                    echo '<td>'.$data['nik'].'</td>';      
-                                    echo '<td>'.$data['jenis_kelamin'].'</td>';      
+                                    echo '<td>'.$data['jenis_kelamin'].'</td>';    
+                                    echo '<td>'.$data['nik'].'</td>';        
                                     echo '<td>'.$data['kk'].'</td>';
                                     echo '<td>'.$data['alamat'].'</td>';
                                     echo '<td>'.$data['dusun'].'</td>';

@@ -64,7 +64,6 @@
                         </div>
                         <div class="ibox-content">
                             <form action="tambah_proses.php" method="post" class="form-horizontal" enctype="multipart/form-data">
-                                
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label">Nama</label>
                                     <div class="col-sm-5">
@@ -166,9 +165,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-1 control-label">RT/RW</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" name="rt_rw" class="form-control">
+                                    <label class="col-sm-1 control-label">RT</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" name="rt" class="form-control">
+                                    </div>
+                                    <label class="col-sm-1 control-label">RW</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" name="rw" class="form-control">
                                     </div>
                                     <label class="col-sm-2 control-label">Pekerjaan</label>
                                     <div class="col-sm-4">
