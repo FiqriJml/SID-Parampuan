@@ -8,6 +8,10 @@ $nik = $_GET['nik'];
 $no_surat = $_GET['no_surat'];
 $yang_ttd = $_GET['yang_ttd'];
 
+$usaha_tahun_mulai = $_GET['usaha_tahun_mulai'];
+$usaha_nama = $_GET['usaha_nama'];
+$usaha_lokasi = $_GET['usaha_lokasi'];
+
 include('../koneksi.php');
 
 //ambil data pada database
@@ -17,11 +21,10 @@ if (mysqli_num_rows($result) > 0) {
     $data_penduduk = mysqli_fetch_assoc($result);
 }
 
-
 //simpan SURAT ke tabel surat
 session_start();
 $tgl = date('Y-m-d');
-$jenis_surat = 'Surat Keterangan Belum Menikah';
+$jenis_surat = 'Surat Keterangan Usaha';
 $id_penduduk = $data_penduduk['id'];
 $id_user = $_SESSION['id_user'];
 $keperluan = $_GET['keperluan'];
@@ -35,7 +38,6 @@ $result = mysqli_query($con, $query);
 // simpan Selesai
 
 
-// Ambil logo desa
 $query = "SELECT logo FROM profil_desa WHERE lOWER(nama_desa)=lOWER('Parampuan')";
 $result = mysqli_query($con, $query);
 if (mysqli_num_rows($result) > 0) {
@@ -167,9 +169,9 @@ ob_start();
                 </div>
                 <div class="surat-badan">
                     <div class="text-center">
-                        <span class="garis_bawah"><b>SURAT KETERANGAN</b></span> <br>
+                        <span class="garis_bawah"><b>SURAT KETERANGAN USAHA</b></span> <br>
                         <div style="margin-top: 3px;">
-                        Nomor : <?= $no_surat; ?>. /&emsp;&emsp;/ PRM / 2019 <br>
+                        Nomor : <?= $no_surat; ?> / 384 / X / 2019 <br>
                         </div>
                     </div>
                     <br>
@@ -184,19 +186,16 @@ ob_start();
                                     <td>Tempat/tgl. lahir</td> <td>:</td> <td><?= $tempat; ?>, <?= $tanggal_lahir; ?></td>
                                 </tr>
                                 <tr>
+                                    <td>NIK</td> <td>:</td> <td><?= $nik; ?></td>
+                                </tr>
+                                <tr>
                                     <td>Jenis kelamin</td> <td>:</td> <td><?= $jenis_kelamin; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>kewarganegaraan</td> <td>:</td> <td><?= $kewarganegaraan; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Golongan darah</td> <td>:</td> <td><?= $gol_darah; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Agama</td> <td>:</td> <td><?= $agama; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Status Perkawinan</td> <td>:</td> <td><?= $status_perkawinan; ?></td>
+                                    <td>Status</td> <td>:</td> <td><?= $status_perkawinan; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Pekerjaan</td> <td>:</td> <td><?= $pekerjaan; ?></td>
@@ -208,7 +207,7 @@ ob_start();
                             </table>
                         </div>  
                         <br>
-                        <p>&emsp;&emsp;&emsp;Yang namanya tersebut diatas memang benar penduduk yang berdomisili dan bertempat tinggal di wilayah kami Desa Perampuan, Kecamatan Labuapi, Kabupaten Lombok Barat. Sepanjang pengetahuan dan pengecekan kami serta menurut keterangan yang bersangkutan bahwa, yang bersangkutan memang benar sampai saat ini, <strong><i>Belum Menikah</i></strong>.</p>
+                        <p>&emsp;&emsp;&emsp;Bahwa yang namanya tersebut diatas memang benar penduduk yang berdomisili dan bertempat tinggal di wilayah kami Desa Perampuan, Kecamatan Labuapi, Kabupaten Lombok Barat. dan yang bersangkutan memang benar mempunyai Usaha   <strong><u>“ <?= $usaha_nama; ?> ”</u></strong> yang berlokasi di <?= $usaha_lokasi; ?>, dan usaha tersebut dimulai sejak tahun <?= $usaha_tahun_mulai; ?>  sampai saat ini.</p>
                         <p>&emsp;&emsp;&emsp;Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
                     </div>
                     <br><br> <br><br>
@@ -230,7 +229,6 @@ ob_start();
 $body = ob_get_clean();
 $mpdf->WriteHTML($body);
 ob_get_clean();
-
 // tampilkan surat
 $mpdf->Output($file, 'I');
 //simpan SURAT ke folder arsip_surat

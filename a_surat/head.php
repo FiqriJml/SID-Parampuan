@@ -21,4 +21,6 @@ if (!isset($_SESSION['admin'])) {
     <link href="../css/plugins/dataTables/datatables.min.css" rel="stylesheet">
     <script src="../ckeditor/ckeditor.js"></script>
     <!-- <link rel="icon" href="../img/logo2.png" type="image/x-icon" /> -->
+    <!-- VueJs -->
+    <script src="../js/vue.js"></script>
 </head>

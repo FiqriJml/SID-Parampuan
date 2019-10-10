@@ -24,4 +24,6 @@ if (!isset($_SESSION['admin'])) {
     <link href="css/style.css" rel="stylesheet">
     <!-- <link rel="icon" href="img/logo2.png" type="image/x-icon" /> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- VueJs -->
+    <script src="js/vue.js"></script>
 </head>

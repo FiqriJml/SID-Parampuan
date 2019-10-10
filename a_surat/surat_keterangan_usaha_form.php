@@ -79,7 +79,7 @@ if (mysqli_num_rows($result) == 0) {
 							<a href="index.php">Pembuatan Surat</a>
 						</li>
 						<li class="active">
-							<strong>Surat Keterangan Belum Menikah</strong>
+							<strong>Surat Keterangan Usaha</strong>
 						</li>
 					</ol>
 				</div>
@@ -89,22 +89,22 @@ if (mysqli_num_rows($result) == 0) {
 					<div class="col-lg-12">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>Membuat Surat Keterangan Belum Menikah</h5>
+								<h5>Membuat Surat Keterangan Usaha</h5>
 							</div>
 							<div class="ibox-content">
 								<!-- <i>
 									<p class="text-warning">Untuk Membuat Surat Keterangan Belum Menikah Isi Semua Form Berikut</p>
 								</i> <br> -->
-								<form action="surat_keterangan_belum_menikah.php" target="_blank" method="GET" class="form-horizontal" enctype="multipart/form-data">
+								<form action="surat_keterangan_usaha.php" target="_blank" method="GET" class="form-horizontal" enctype="multipart/form-data">
 									<div class="form-group">
 										<label class="col-sm-2 control-label">No Surat</label>
-										<div class="col-sm-4">
+										<div class="col-sm-5">
 											<input type="text" name="no_surat" class="form-control" v-model="no_surat">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">Nik</label>
-										<div class="col-sm-4">
+										<div class="col-sm-5">
 											<input required autocomplete="off" name="nik" placeholder="cari NIK" id="dialog_nik-input" type="text" class="form-control" v-model="nik" @focus="dialog_nik=true" @blur="cekNik()">
 											<div @mousedown.prevent class="cari-nik" v-if="dialog_nik">
 												<template v-for="data in filterPenduduk()">
@@ -139,14 +139,32 @@ if (mysqli_num_rows($result) == 0) {
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="col-sm-2 control-label">Nama Usaha</label>
+										<div class="col-sm-5">
+											<input type="text" name="usaha_nama" class="form-control" v-model="usaha_nama">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Lokasi Usaha</label>
+										<div class="col-sm-5">
+											<input type="text" name="usaha_lokasi" class="form-control" v-model="usaha_lokasi">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Tahun Mulai Usaha</label>
+										<div class="col-sm-5">
+											<input type="text" name="usaha_tahun_mulai" class="form-control" v-model="usaha_tahun_mulai">
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-sm-2 control-label">Untuk Keperluan</label>
-										<div class="col-sm-4">
+										<div class="col-sm-5">
 											<input type="text" name="keperluan" class="form-control" v-model="keperluan">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">Yang Bertandatangan</label>
-										<div class="col-sm-4">
+										<div class="col-sm-5">
 											<input type="text" name="yang_ttd" class="form-control" v-model="yang_ttd">
 										</div>
 									</div>
@@ -177,8 +195,11 @@ if (mysqli_num_rows($result) == 0) {
 				nik: '',
 				data_penduduk: data_penduduk,
 				yang_ttd: 'S A R H A N',
-				no_surat: '400',
-				keperluan: 'Daftar Kerja',
+				keperluan: '',
+				no_surat: '500',
+				usaha_nama: 'Jual Ayam',
+				usaha_lokasi: 'Pasar Kediri, Desa kediri, Kecamatan Kediri, Kabupaten Lombok Barat',
+				usaha_tahun_mulai: '2015',
 				data_orang: '',
 			},
 			methods: {
@@ -205,6 +226,12 @@ if (mysqli_num_rows($result) == 0) {
 						this.nik = '';
 					}
 					this.dialog_nik = false;
+				},
+				ubah: function() {
+					var tmp = this.penghasilan_dari.toString();
+					tmp.length;
+					console.log(tmp.length);
+					console.log(Number(tmp));
 				}
 			},
 		});

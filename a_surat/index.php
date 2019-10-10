@@ -56,13 +56,13 @@
                                 <a href="#" class="btn btn-danger m-r-sm">Surat Domisili Perusahaan</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-primary m-r-sm">Surat Keterangan Penghasilan</a>
+                                <a href="surat_keterangan_penghasilan_form.php" class="btn btn-primary m-r-sm">Surat Keterangan Penghasilan</a>
                             </td>
                             <td>
                                 <a href="#" class="btn btn-info m-r-sm">Surat Keterangan Pindah</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-warning m-r-sm">Surat Keterangan Usaha</a>
+                                <a href="surat_keterangan_usaha_form.php" class="btn btn-warning m-r-sm">Surat Keterangan Usaha</a>
                             </td>
                         </tr>
                         <tr>

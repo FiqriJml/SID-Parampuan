@@ -8,6 +8,10 @@ $nik = $_GET['nik'];
 $no_surat = $_GET['no_surat'];
 $yang_ttd = $_GET['yang_ttd'];
 
+$penghasilan_dari = $_GET['penghasilan_dari'];
+$penghasilan_sampai = $_GET['penghasilan_sampai'];
+$penghasilan_terbilang = $_GET['penghasilan_terbilang'];
+
 include('../koneksi.php');
 
 //ambil data pada database
@@ -21,7 +25,7 @@ if (mysqli_num_rows($result) > 0) {
 //simpan SURAT ke tabel surat
 session_start();
 $tgl = date('Y-m-d');
-$jenis_surat = 'Surat Keterangan Belum Menikah';
+$jenis_surat = 'Surat Keterangan Penghasilan';
 $id_penduduk = $data_penduduk['id'];
 $id_user = $_SESSION['id_user'];
 $keperluan = $_GET['keperluan'];
@@ -34,8 +38,6 @@ $query = "INSERT INTO `surat`(`tanggal`, `jenis_surat`, `id_penduduk`, `id_user`
 $result = mysqli_query($con, $query);
 // simpan Selesai
 
-
-// Ambil logo desa
 $query = "SELECT logo FROM profil_desa WHERE lOWER(nama_desa)=lOWER('Parampuan')";
 $result = mysqli_query($con, $query);
 if (mysqli_num_rows($result) > 0) {
@@ -167,9 +169,9 @@ ob_start();
                 </div>
                 <div class="surat-badan">
                     <div class="text-center">
-                        <span class="garis_bawah"><b>SURAT KETERANGAN</b></span> <br>
+                        <span class="garis_bawah"><b>SURAT KETERANGAN PENGHASILAN</b></span> <br>
                         <div style="margin-top: 3px;">
-                        Nomor : <?= $no_surat; ?>. /&emsp;&emsp;/ PRM / 2019 <br>
+                        Nomor : <?= $no_surat; ?> / 242 / X / 2019 <br>
                         </div>
                     </div>
                     <br>
@@ -184,19 +186,13 @@ ob_start();
                                     <td>Tempat/tgl. lahir</td> <td>:</td> <td><?= $tempat; ?>, <?= $tanggal_lahir; ?></td>
                                 </tr>
                                 <tr>
+                                    <td>NIK</td> <td>:</td> <td><?= $nik; ?></td>
+                                </tr>
+                                <tr>
                                     <td>Jenis kelamin</td> <td>:</td> <td><?= $jenis_kelamin; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>kewarganegaraan</td> <td>:</td> <td><?= $kewarganegaraan; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Golongan darah</td> <td>:</td> <td><?= $gol_darah; ?></td>
-                                </tr>
-                                <tr>
                                     <td>Agama</td> <td>:</td> <td><?= $agama; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Status Perkawinan</td> <td>:</td> <td><?= $status_perkawinan; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Pekerjaan</td> <td>:</td> <td><?= $pekerjaan; ?></td>
@@ -208,7 +204,7 @@ ob_start();
                             </table>
                         </div>  
                         <br>
-                        <p>&emsp;&emsp;&emsp;Yang namanya tersebut diatas memang benar penduduk yang berdomisili dan bertempat tinggal di wilayah kami Desa Perampuan, Kecamatan Labuapi, Kabupaten Lombok Barat. Sepanjang pengetahuan dan pengecekan kami serta menurut keterangan yang bersangkutan bahwa, yang bersangkutan memang benar sampai saat ini, <strong><i>Belum Menikah</i></strong>.</p>
+                        <p>&emsp;&emsp;&emsp;Yang namanya tersebut diatas memang benar penduduk yang berdomisili dan bertempat tinggal di wilayah kami Desa Perampuan, Kecamatan Labuapi, Kabupaten Lombok Barat. Sepanjang pengetahuan dan pengecekan kami serta menurut keterangan yang bersangkutan bahwa, yang bersangkutan memang benar sampai saat ini, <u>mempunyai penghasilan  sebesar  Rp. <?= $penghasilan_dari ?> - <?= $penghasilan_sampai ?> ( <?= $penghasilan_terbilang ?> )</u>.</p>
                         <p>&emsp;&emsp;&emsp;Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
                     </div>
                     <br><br> <br><br>

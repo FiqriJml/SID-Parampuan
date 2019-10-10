@@ -27,6 +27,7 @@ if (isset($_POST['masuk']) == 'on') {
                 $_SESSION['username'] = $data['username'];
                 $_SESSION['password'] = $data['password'];
                 $_SESSION['nama'] = $data['nama'];
+                $_SESSION['id_user'] = $data['id'];
                 
             }
             header('Location: index.php');
