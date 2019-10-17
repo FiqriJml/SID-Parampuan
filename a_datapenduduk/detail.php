@@ -148,7 +148,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label">RT/RW</label>
                                     <div class="col-sm-5">
-                                        <input type="text" name="rt_rw" class="form-control" value="<?php echo $d['rt_rw']; ?>" readonly>
+                                        <input type="text" name="rt_rw" class="form-control" value="<?php echo $d['rt'].'/'.$d['rw']; ?>" readonly>
                                     </div>
                                     <label class="col-sm-2 control-label">Pekerjaan</label>
                                     <div class="col-sm-4">

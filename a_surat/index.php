@@ -1,4 +1,6 @@
-<?php include "head.php" ?>
+<?php
+    include "head.php" ;
+?>
 <body>
 
     <div id="wrapper">
@@ -53,16 +55,16 @@
                         <tbody>
                         <tr>
                             <td>
-                                <a href="#" class="btn btn-danger m-r-sm">Surat Domisili Perusahaan</a>
+                                <a href="surat/01_keterangan_usaha" class="btn btn-warning m-r-sm">Surat Keterangan Usaha</a>
+                            </td>
+                            <td>
+                                <a href="surat/02_pengantar_permohononan_kk" class="btn btn-info m-r-sm">Surat Pengantar Permohononan Kartu Keluarga</a>
                             </td>
                             <td>
                                 <a href="surat_keterangan_penghasilan_form.php" class="btn btn-primary m-r-sm">Surat Keterangan Penghasilan</a>
                             </td>
                             <td>
                                 <a href="#" class="btn btn-info m-r-sm">Surat Keterangan Pindah</a>
-                            </td>
-                            <td>
-                                <a href="surat_keterangan_usaha_form.php" class="btn btn-warning m-r-sm">Surat Keterangan Usaha</a>
                             </td>
                         </tr>
                         <tr>

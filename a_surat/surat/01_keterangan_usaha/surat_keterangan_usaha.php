@@ -1,18 +1,31 @@
 <?php
+    $root = "../../../";
+    require_once $root.'vendor/autoload.php';
 
-require_once __DIR__ . '/../vendor/autoload.php';
+    $arsip_surat = $root.'arsip_surat/';
 
 $mpdf = new \Mpdf\Mpdf();
 
 $nik = $_GET['nik'];
-$no_surat = $_GET['no_surat'];
+$no_agenda = $_GET['no_agenda'];
 $yang_ttd = $_GET['yang_ttd'];
+$jabatan_ttd = $_GET['jabatan_ttd'];
 
 $usaha_tahun_mulai = $_GET['usaha_tahun_mulai'];
 $usaha_nama = $_GET['usaha_nama'];
 $usaha_lokasi = $_GET['usaha_lokasi'];
 
-include('../koneksi.php');
+include($root.'koneksi.php');
+
+// ambil data desa
+$query = "SELECT * FROM profil_desa WHERE id_profil=1";
+$result = mysqli_query($con, $query);
+if (mysqli_num_rows($result) > 0) {
+    while ($data = mysqli_fetch_assoc($result)) {
+        $logo = $data['logo'];
+        $data_desa = $data;
+    }
+}
 
 //ambil data pada database
 $query = "SELECT * FROM data_penduduk WHERE nik='$nik'";
@@ -29,22 +42,14 @@ $id_penduduk = $data_penduduk['id'];
 $id_user = $_SESSION['id_user'];
 $keperluan = $_GET['keperluan'];
 
-$file = $nik."_".$jenis_surat.".pdf";
-$arsip_surat = '../arsip_surat/';
+// nama file nya
+$file = $nik."_".$jenis_surat."_".$tgl.".pdf";
 
 $query = "INSERT INTO `surat`(`tanggal`, `jenis_surat`, `id_penduduk`, `id_user`, `keperluan`, `file`) VALUES (
                     '$tgl', '$jenis_surat', '$id_penduduk', '$id_user', '$keperluan','$file')";
 $result = mysqli_query($con, $query);
 // simpan Selesai
 
-
-$query = "SELECT logo FROM profil_desa WHERE lOWER(nama_desa)=lOWER('Parampuan')";
-$result = mysqli_query($con, $query);
-if (mysqli_num_rows($result) > 0) {
-    while ($data = mysqli_fetch_assoc($result)) {
-        $logo = $data['logo'];
-    }
-}
 $nama = $data_penduduk['nama'];
 $tempat = $data_penduduk['tempat'];
 $tanggal_lahir = $data_penduduk['tanggal_lahir'];
@@ -106,11 +111,18 @@ ob_start();
     }
     .kop-logo{
         float: left;
-        width: 80px;
+        width: 70px;
     }
     .kop-isi{
+        float: left;
+        width: 426px;
         text-align: center;
         font-weight: bold;
+        /*background-color: #cfc*/
+    }
+    .kop-logo-desa{
+        float: left;
+        width: 70px;
     }
     .clearfix {
       overflow: auto;
@@ -156,22 +168,24 @@ ob_start();
             <div class="surat-isi">
                 <div class="surat-kop clearfix">
                     <div class="kop-logo"> 
-                        <img src="../img/logo/<?=$logo?>" width="80px;">
+                        <img src="<?= $root; ?>img/logo/logo_lombok_barat.png">
                     </div>
                     <div class="kop-isi">
                     <span>PEMERINTAH KABUPATEN LOMBOK BARAT<br>
                         <!-- K E C A M A T A N  L A B U A P I <br> -->
                         KECAMATAN LABUAPI</span><br>
-                                <span class="desa">DESA PERAMPUAN</span> <br>
-                        Alamat Jln. Raya Pengsong No.  21  Tlp. 085303700606 Desa Perampuan 
-                  <br> E-Mail: desaperampuan@gmail.com Kode Pos 83361
+                                <span class="desa">DESA <?=$data_desa['nama_desa']?></span> <br>
+                        <?=$data_desa['alamat_desa']?> Kode Pos: <?=$data_desa['kode_pos']?>
+                    </div>
+                    <div class="kop-logo-desa"> 
+                        <img src="<?= $root; ?>img/logo/<?=$data_desa['logo']?>" >
                     </div>
                 </div>
                 <div class="surat-badan">
                     <div class="text-center">
                         <span class="garis_bawah"><b>SURAT KETERANGAN USAHA</b></span> <br>
                         <div style="margin-top: 3px;">
-                        Nomor : <?= $no_surat; ?> / 384 / X / 2019 <br>
+                        Nomor : 500 / <?= $no_agenda; ?> / X / 2019 <br>
                         </div>
                     </div>
                     <br>
@@ -213,7 +227,18 @@ ob_start();
                     <br><br> <br><br>
                     <div class="surat-ttd">
                         Perampuan, <?= $hari_ini ?><br>
-                        Kepala Desa Perampuan <br> <br><br><br> <br> <br> <br>
+                        <?php 
+                            $ket1 = 'Kepala Desa Perempuan';
+                            if($jabatan_ttd !== "Kepala Desa") {
+                                $ket1 = 'A/n Kepala Desa Perempuan';
+                                $jabatan_ttd .=',';
+                            }else{
+                                $jabatan_ttd = '';
+                            }
+                        ?>
+                        <?= $ket1; ?><br> 
+                        <?= $jabatan_ttd; ?> <br> 
+                        <br><br><br> <br> <br> <br>
 
 
 

@@ -1,6 +1,6 @@
-<?php include "head.php" ?>
+<?php include "../head.php" ?>
 <?php
-include('../koneksi.php');
+include('../../../koneksi.php');
 
 $query = "SELECT * FROM data_penduduk order by id desc";
 $result = mysqli_query($con, $query);
@@ -13,6 +13,15 @@ if (mysqli_num_rows($result) == 0) {
 		$data_penduduk[$i] =  $data;
 		$i++;
 	}
+}
+
+// ambil data desa
+$query = "SELECT * FROM profil_desa WHERE id_profil=1";
+$result = mysqli_query($con, $query);
+if (mysqli_num_rows($result) > 0) {
+    while ($data = mysqli_fetch_assoc($result)) {
+        $data_desa = $data;
+    }
 }
 ?>
 <style>
@@ -46,7 +55,7 @@ if (mysqli_num_rows($result) == 0) {
 
 	<div id="wrapper">
 
-		<?php include "nav.php" ?>
+		<?php include "../nav.php" ?>
 
 		<div id="page-wrapper" class="gray-bg">
 			<div class="row border-bottom">
@@ -97,9 +106,9 @@ if (mysqli_num_rows($result) == 0) {
 								</i> <br> -->
 								<form action="surat_keterangan_usaha.php" target="_blank" method="GET" class="form-horizontal" enctype="multipart/form-data">
 									<div class="form-group">
-										<label class="col-sm-2 control-label">No Surat</label>
+										<label class="col-sm-2 control-label">No Agenda</label>
 										<div class="col-sm-5">
-											<input type="text" name="no_surat" class="form-control" v-model="no_surat">
+											<input type="text" name="no_agenda" class="form-control" v-model="no_agenda">
 										</div>
 									</div>
 									<div class="form-group">
@@ -165,7 +174,16 @@ if (mysqli_num_rows($result) == 0) {
 									<div class="form-group">
 										<label class="col-sm-2 control-label">Yang Bertandatangan</label>
 										<div class="col-sm-5">
-											<input type="text" name="yang_ttd" class="form-control" v-model="yang_ttd">
+											<select type="text" class="form-control" @change="get_yang_ttd()" v-model="opsi_ttd_pilih"> 
+												<option v-for="(opsi, index) in opsi_ttd" :value="index">{{opsi.jabatan}}</option>
+											</select>
+										</div>
+									</div>
+									<input type="text" name="jabatan_ttd" v-model="jabatan_ttd" hidden>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Nama Yang ttd</label>
+										<div class="col-sm-5">
+											<input type="text" name="yang_ttd" class="form-control" v-model="yang_ttd" readonly="">
 										</div>
 									</div>
 									<div class="form-group">
@@ -181,22 +199,37 @@ if (mysqli_num_rows($result) == 0) {
 				</div>
 			</div>
 
-			<?php include "footer.php" ?>
+			<?php include "../footer.php" ?>
 
 		</div>
 	</div>
 	<script type="text/javascript">
 		var data_penduduk = '<?php echo json_encode($data_penduduk); ?>';
 		data_penduduk = JSON.parse(data_penduduk);
+		var data_desa = '<?= json_encode($data_desa)?>';
+		data_desa = JSON.parse(data_desa);
+		console.log(data_desa);
 		var vm = new Vue({
 			el: '#app',
 			data: {
+				data_desa: data_desa,
+				opsi_ttd: [
+					{jabatan: 'Kepala Desa', nama: data_desa.kades},
+					{jabatan: 'Sekertaris Desa', nama: data_desa.sekdes},
+					{jabatan: 'Kasi Kesejahteraan', nama: data_desa.kasi_kesejahteraan},
+					{jabatan: 'Kasi Pelayanan', nama: data_desa.kasi_pelayanan},
+					{jabatan: 'Kasi Pemerintahan', nama: data_desa.kasi_pemerintahan},
+					{jabatan: 'Kaur Keuangan', nama: data_desa.kaur_keuangan},
+					{jabatan: 'Kaur TU', nama: data_desa.kaur_tu},
+				],
+				opsi_ttd_pilih: 0,
 				dialog_nik: false,
 				nik: '',
 				data_penduduk: data_penduduk,
-				yang_ttd: 'S A R H A N',
+				yang_ttd: data_desa.kades,
+				jabatan_ttd: 'Kepala Desa',
 				keperluan: '',
-				no_surat: '500',
+				no_agenda: 22,
 				usaha_nama: 'Jual Ayam',
 				usaha_lokasi: 'Pasar Kediri, Desa kediri, Kecamatan Kediri, Kabupaten Lombok Barat',
 				usaha_tahun_mulai: '2015',
@@ -232,6 +265,11 @@ if (mysqli_num_rows($result) == 0) {
 					tmp.length;
 					console.log(tmp.length);
 					console.log(Number(tmp));
+				},
+				get_yang_ttd: function() {
+					var i = this.opsi_ttd_pilih;
+					this.jabatan_ttd = this.opsi_ttd[i].jabatan;
+					this.yang_ttd = this.opsi_ttd[i].nama;
 				}
 			},
 		});
