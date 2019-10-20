@@ -103,10 +103,15 @@
                                 <a href="surat/14_keterangan_bepergian" class="btn btn-warning m-r-sm">Surat Keterangan Bepergian</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-info m-r-sm">Surat Keterangan Domisili KK</a>
+                                <a href="surat/15_keterangan_penghasilan_orang_tua" class="btn btn-info m-r-sm">Surat Keterangan Penghasilan Orang Tua</a>
                             </td>
                             <td>
                                 <a href="#" class="btn btn-warning m-r-sm">Surat Keterangan Duda</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="surat/17_keterangan_harga_tanah" class="btn btn-danger m-r-sm">Surat Keterangan Harga Tanah</a>
                             </td>
                         </tr>
                         </tbody>
