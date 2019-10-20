@@ -61,27 +61,47 @@
                                 <a href="surat/02_pengantar_permohononan_kk" class="btn btn-info m-r-sm">Surat Pengantar Permohononan Kartu Keluarga</a>
                             </td>
                             <td>
-                                <a href="surat_keterangan_penghasilan_form.php" class="btn btn-primary m-r-sm">Surat Keterangan Penghasilan</a>
+                                <a href="surat/03_keterangan_status" class="btn btn-primary m-r-sm">Surat Keterangan Status</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-info m-r-sm">Surat Keterangan Pindah</a>
+                                <a href="surat/04_keterangan_kematian" class="btn btn-primary m-r-sm">Surat Keterangan Kematian</a>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="#" class="btn btn-warning m-r-sm">Surat Pengantar Permohonan KK</a>
+                                <a href="surat/05_keterangan_penduduk_sementara" class="btn btn-primary m-r-sm">Surat Keterangan Penduduk Sementara</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-danger m-r-sm">SKTM Rumah Sakit</a>
+                                <a href="surat/06_keterangan_domisili" class="btn btn-primary m-r-sm">Surat Keterangan Domisili</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-primary m-r-sm">SKTM Sekolah</a>
+                                <a href="surat/07_keterangan_lahir" class="btn btn-primary m-r-sm">Surat Keterangan Lahir</a>
                             </td>
                             <td>
-                                <a href="surat_keterangan_belum_menikah_form.php" class="btn btn-info m-r-sm">Surat Keterangan Belum Menikah</a>
+                                <a href="surat/08_keterangan_pindah" class="btn btn-info m-r-sm">Surat Keterangan Pindah</a>
                             </td>
                         </tr>
                         <tr>
+                            <td>
+                                <a href="surat/09_keterangan_tidak_mampu_sekolah" class="btn btn-primary m-r-sm">Surat Keterangan Tidak Mampu Sekolah</a>
+                            </td>
+                            <td>
+                                <a href="surat/10_keterangan_tidak_mampu" class="btn btn-primary m-r-sm">Surat Keterangan Tidak Mampu</a>
+                            </td>
+                            <td>
+                                <a href="surat/11_keterangan_catatan_kepolisian" class="btn btn-warning m-r-sm">Surat Keterangan Catatan Kepolisian</a>
+                            </td>
+                            <td>
+                                <a href="surat/12_keterangan_menikah" class="btn btn-primary m-r-sm">Surat Keterangan Menikah</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#" class="btn btn-info m-r-sm">Surat Keterangan Domisili KK</a>
+                            </td>
+                            <td>
+                                <a href="surat/14_keterangan_bepergian" class="btn btn-warning m-r-sm">Surat Keterangan Bepergian</a>
+                            </td>
                             <td>
                                 <a href="#" class="btn btn-info m-r-sm">Surat Keterangan Domisili KK</a>
                             </td>
