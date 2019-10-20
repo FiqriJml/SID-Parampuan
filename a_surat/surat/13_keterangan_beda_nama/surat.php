@@ -10,10 +10,10 @@ $tgl = date('Y-m-d');
 
 // Varian Surat
 // yang di ganti untuk setiap surat
-$jenis_surat = 'Surat Keterangan Catatan Kepolisian';
+$jenis_surat = 'Surat Keterangan Beda Nama';
 
-$no_label = "PEM-DK";
-$no_surat = "330";
+$no_label = "TU.Umum-LA";
+$no_surat = "471";
 $tujuan = $_GET['tujuan'];
 $lamanya = $_GET['lamanya'];
 $tanggal_berangkat = $_GET['tanggal_berangkat'];
@@ -271,10 +271,16 @@ ob_start();
                             </table>
                         </div>  
                         <p>
-                            &emsp;&emsp;&emsp;&emsp;Bahwa yang tersebut namanya diatas sepengetahuan serta pendataan kami adalah penduduk yang
-                            berdomisili diwilayah kami dan yang bersangkutan <b><u>MEMANG BENAR BERKELAKUAN BAIK DAN TIDAK
-                            PERNAH TERSANGKUT DENGAN URUSAN KEPOLISIAN ATAU TINDAK PIDANA DAN ATAU PELANGGARAN
-                            HUKUM LAINNYA</u></b>.
+                            &emsp;&emsp;&emsp;&emsp;Bahwa yang namanya tersebut diatas sepengetahuan dan pendataan kami
+                            adalah memang benar penduduk yang berdomisili di wilayah kami dan memang benar adalah orang yang sama / satu orang dengan nama <b><?= $_GET['nama_sebenarnya'] ?> Nomor KK: 
+                            <?= $data_penduduk['kk'] ?>. NIK: <?= $data_penduduk['nik'] ?> </b> Tempat Tgl lahir: 
+                            <?= $data_penduduk['tempat'] ?> <?= $data_penduduk['tanggal_lahir'] ?> 
+                            Alamat : <?= $data_penduduk['alamat'] ?> 
+                            Dusun <?= $data_penduduk['dusun'] ?> 
+                            Desa <?= $data_penduduk['desa'] ?> 
+                            Kecamatan Labuapi 
+                            Kabupaten Lombok Barat 
+                            Yang tercatat di Data Kependudukan Dan Catatan Sipil Kabupaten Lombok Barat.
                         </p>
                         <p>
                             &emsp;&emsp;&emsp;&emsp;Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana

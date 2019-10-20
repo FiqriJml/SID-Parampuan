@@ -206,7 +206,7 @@ if (mysqli_num_rows($result) > 0) {
 	<script type="text/javascript">
 		var data_penduduk = '<?php echo json_encode($data_penduduk); ?>';
 		data_penduduk = JSON.parse(data_penduduk);
-		var data_desa = '<?= json_encode($data_desa)?>';
+		var data_desa = '<?= json_encode($data_desa); ?>';
 		data_desa = JSON.parse(data_desa);
 		console.log(data_desa);
 		var vm = new Vue({

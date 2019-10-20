@@ -2,7 +2,7 @@
 <?php
 include('../../../koneksi.php');
 
-$judul_surat = "Surat Keterangan Catatan Kepolisian";
+$judul_surat = "Surat Keterangan Beda Nama";
 
 $query = "SELECT * FROM data_penduduk order by id desc";
 $result = mysqli_query($con, $query);
@@ -163,6 +163,13 @@ if (mysqli_num_rows($result) > 0) {
 									</div>
 							
 									<div class="form-group">
+										<label class="col-sm-2 control-label">Nama Sebenarnya</label>
+										<div class="col-sm-5">
+											<input type="text" name="nama_sebenarnya" class="form-control" v-model="nama_sebenarnya">
+										</div>
+									</div>
+
+									<div class="form-group">
 										<label class="col-sm-2 control-label">Untuk Keperluan</label>
 										<div class="col-sm-5">
 											<input type="text" name="keperluan" class="form-control" v-model="keperluan">
@@ -217,7 +224,7 @@ if (mysqli_num_rows($result) > 0) {
 			el: '#app',
 			data: {
 				// cata yang beda tiap surat
-
+				nama_sebenarnya: 'MUHAMMAD ZAINI',
 				keperluan: 'Bekerja',
 				keterangan: 'pengobatandirinya yang mengalami keguguran dansedangdirawat di Rumah Sakit Kota Mataram',
 

@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="#" class="btn btn-info m-r-sm">Surat Keterangan Domisili KK</a>
+                                <a href="surat/13_keterangan_beda_nama" class="btn btn-warning m-r-sm">Surat Keterangan Beda Nama</a>
                             </td>
                             <td>
                                 <a href="surat/14_keterangan_bepergian" class="btn btn-warning m-r-sm">Surat Keterangan Bepergian</a>
