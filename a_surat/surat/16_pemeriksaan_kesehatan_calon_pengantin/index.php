@@ -2,7 +2,7 @@
 <?php
 include('../../../koneksi.php');
 
-$judul_surat = "Surat Keterangan Bepergian";
+$judul_surat = "Surat Pemeriksaan Kesehatan Calon Pengantin";
 
 $query = "SELECT * FROM data_penduduk order by id desc";
 $result = mysqli_query($con, $query);
@@ -114,72 +114,85 @@ if (mysqli_num_rows($result) > 0) {
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">Nik</label>
+										<label class="col-sm-2 control-label">Nik <br>Calon Suami</label>
 										<div class="col-sm-5">
-											<input required autocomplete="off" name="nik_bapak" placeholder="cari NIK" id="dialog_nik_bapak-input" type="text" class="form-control" v-model="nik_bapak" @focus="dialog_nik_bapak=true" @blur="cekNik('bapak')">
-											<div @mousedown.prevent class="cari-nik" v-if="dialog_nik_bapak">
-												<template v-for="data in filterPenduduk(nik_bapak)">
-													<div class="nik" @click="pilihNik(data,'bapak')">{{data.nik}}</div>
+											<input required autocomplete="off" name="nik_suami" placeholder="cari NIK" id="dialog_nik-input[0]" type="text" class="form-control" v-model="nik[0]" @focus="dialog_nik_ubah(0,true)" @blur="cekNik(0)">
+											<div @mousedown.prevent class="cari-nik" v-if="dialog_nik[0]">
+												<template v-for="data in filterPenduduk(0)">
+													<div class="nik" @click="pilihNik(data,0)">{{data.nik}}</div>
 												</template>
 											</div>
-											<div v-if="data_bapak">
+											<div v-if="data_orang[0]">
 												<table class="table">
 													<tr>
 														<td>Nama</td>
-														<td>{{data_bapak.nama}}</td>
+														<td>{{data_orang[0].nama}}</td>
 													</tr>
 													<tr>
 														<td>No KK</td>
-														<td>{{data_bapak.kk}}</td>
+														<td>{{data_orang[0].kk}}</td>
 													</tr>
 													<tr>
 														<td>TTL</td>
-														<td>{{data_bapak.tempat}}, {{data_bapak.tanggal_lahir}}</td>
+														<td>{{data_orang[0].tempat}}, {{data_orang[0].tanggal_lahir}}</td>
 													</tr>
 													<tr>
 														<td>L/P</td>
-														<td>{{data_bapak.jenis_kelamin}}</td>
+														<td>{{data_orang[0].jenis_kelamin}}</td>
 													</tr>
 													<tr>
 														<td>Pekerjaan</td>
-														<td>{{data_bapak.pekerjaan}}</td>
+														<td>{{data_orang[0].pekerjaan}}</td>
 													</tr>
 												</table>
 											</div>
 
 										</div>
 									</div>
+
 									<div class="form-group">
-										<label class="col-sm-2 control-label">Tujuan</label>
+										<label class="col-sm-2 control-label">Nik <br>Calon Istri</label>
 										<div class="col-sm-5">
-											<input type="text" name="tujuan" class="form-control" v-model="tujuan">
+											<input required autocomplete="off" name="nik_istri" placeholder="cari NIK" id="dialog_nik-input[1]" type="text" class="form-control" v-model="nik[1]" @focus="dialog_nik_ubah(1,true)" @blur="cekNik(1)">
+											<div @mousedown.prevent class="cari-nik" v-if="dialog_nik[1]">
+												<template v-for="data in filterPenduduk(1)">
+													<div class="nik" @click="pilihNik(data,1)">{{data.nik}}</div>
+												</template>
+											</div>
+											<div v-if="data_orang[1]">
+												<table class="table">
+													<tr>
+														<td>Nama</td>
+														<td>{{data_orang[1].nama}}</td>
+													</tr>
+													<tr>
+														<td>No KK</td>
+														<td>{{data_orang[1].kk}}</td>
+													</tr>
+													<tr>
+														<td>TTL</td>
+														<td>{{data_orang[1].tempat}}, {{data_orang[1].tanggal_lahir}}</td>
+													</tr>
+													<tr>
+														<td>L/P</td>
+														<td>{{data_orang[1].jenis_kelamin}}</td>
+													</tr>
+													<tr>
+														<td>Pekerjaan</td>
+														<td>{{data_orang[1].pekerjaan}}</td>
+													</tr>
+												</table>
+											</div>
+
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Lamanya</label>
-										<div class="col-sm-5">
-											<input type="text" name="lamanya" class="form-control" v-model="lamanya">
-										</div>
-									</div>
+
 									<div class="form-group">
 										<label class="col-sm-2 control-label">Untuk Keperluan</label>
 										<div class="col-sm-5">
 											<input type="text" name="keperluan" class="form-control" v-model="keperluan">
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Tanggal Berangkat</label>
-										<div class="col-sm-5">
-											<input type="text" name="tanggal_berangkat" class="form-control" v-model="tanggal_berangkat">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Keterangan</label>
-										<div class="col-sm-5">
-											<input type="text" name="keterangan" class="form-control" v-model="keterangan">
-										</div>
-									</div>
-
 									<div class="form-group">
 										<label class="col-sm-2 control-label">Yang Bertandatangan</label>
 										<div class="col-sm-5">
@@ -195,58 +208,6 @@ if (mysqli_num_rows($result) > 0) {
 											<input type="text" name="yang_ttd" class="form-control" v-model="yang_ttd" readonly="">
 										</div>
 									</div>
-
-									<div class="form-group">
-										<label class="col-sm-2 control-label"></label>
-										<div class="col-sm-5">
-											<h2 class="">Pengikut</h2>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Jumlah Pengikut</label>
-										<div class="col-sm-1">
-											<input type="number" v-model="jml_pasukan" class="form-control">
-										</div>
-									</div>
-									<template v-for="i in parseInt(jml_pasukan)">
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Pengikut {{i}}</label>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Nama</label>
-											<div class="col-sm-5">
-												<input type="text" name="nama[]" class="form-control">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Jenis Kelamin</label>
-											<div class="col-sm-5">
-												<select type="text" name="jenis_kelamin[]" class="form-control">
-													<option value="-">Jenis Kelamin</option>
-													<option value="L">Laki-laki</option>
-													<option value="P">Perempuan</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Hubungan Keluarga</label>
-											<div class="col-sm-5">
-												<input type="text" name="hubungan_kel[]" class="form-control">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">TTL</label>
-											<div class="col-sm-5">
-												<input type="text" name="ttl[]" class="form-control">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Keterangan</label>
-											<div class="col-sm-5">
-												<input type="text" name="ket[]" class="form-control">
-											</div>
-										</div>
-									</template>
 
 									<div class="form-group">
 										<div class="col-sm-2 col-sm-offset-4">
@@ -275,9 +236,12 @@ if (mysqli_num_rows($result) > 0) {
 			el: '#app',
 			data: {
 				// cata yang beda tiap surat
-				tujuan: 'Provinsi Sulawesi Selatan',
-				lamanya: '1 Tahun',
-				tanggal_berangkat: '10 September 2020',
+				pindah_alamat: 'DUSUN JERANJANG',
+				pindah_desa: 'TAMAN AYU',
+				pindah_kec: 'GERUNG',
+				pindah_kab: 'LOMBOK BARAT',
+				pindah_prov: 'NTB',
+				pindah_tgl: '10 September 2020',
 
 				keperluan: 'Bekerja',
 				keterangan: 'Bahwa yang bersangkutan sepengetahuan kami memang benar Menunjukkan sikap dan tingkah laku yang baik',
@@ -302,8 +266,8 @@ if (mysqli_num_rows($result) > 0) {
 					{jabatan: 'Kaur TU', nama: data_desa.kaur_tu},
 				],
 				opsi_ttd_pilih: 0,
-				dialog_nik: false,
-				nik: '',
+				dialog_nik: [false,false,false,false,false,false,false,false,false,false,false,false,],
+				nik: ['','','','','','','','','','','','',],
 				data_penduduk: data_penduduk,
 				yang_ttd: data_desa.kades,
 				jabatan_ttd: 'Kepala Desa',
@@ -311,46 +275,31 @@ if (mysqli_num_rows($result) > 0) {
 				usaha_nama: 'Jual Ayam',
 				usaha_lokasi: 'Pasar Kediri, Desa kediri, Kecamatan Kediri, Kabupaten Lombok Barat',
 				usaha_tahun_mulai: '2015',
-				data_orang: '',
+				data_orang: [],
 			},
 			methods: {
-				filterPenduduk: function(nik) {
+				filterPenduduk: function(index) {
+					nik = this.nik[index];
 					return this.data_penduduk.filter((data) => {
 						return data.nik.toString().match(nik);
 					});
 				},
-				pilihNik: function(data,ket) {
+				dialog_nik_ubah: function(index,data){
+					Vue.set(this.dialog_nik, index, data);
+				},
+				pilihNik: function(data,index) {
 					if(data.jenis_kelamin == "L"){
 						data.jenis_kelamin = "Laki-laki";
 					}else{
 						data.jenis_kelamin = "Perempuan";
 					}
-					if(ket == 'bapak'){
-						this.data_bapak = data;
-						this.nik_bapak = data.nik;
-					}else if(ket == 'ibu'){
-						this.nik_ibu = data.nik;
-					}else{
-						this.data_orang = data;
-						this.nik = data.nik;
-					}
-					document.getElementById("dialog_nik_bapak-input").blur();
-					// document.getElementById("dialog_nik_ibu-input").blur();
-					document.getElementById("dialog_nik-input").blur();
+					Vue.set(this.data_orang, index, data);
+					Vue.set(this.nik, index, data.nik);
+					document.getElementById("dialog_nik-input["+index+"]").blur();
 				},
-				cekNik: function(ket) {
-					console.log(ket);
-					var data_orang;
-					if(ket == 'bapak'){
-						nik = this.nik_bapak;
-						data_orang = this.data_bapak;
-					}else if(ket == 'ibu'){
-						nik = this.nik_ibu;
-					}else{
-						nik = this.nik;
-						data_orang = this.data_orang;
-						console.log('jalan');
-					}
+				cekNik: function(index) {
+					var data_orang = this.data_orang[index];
+					nik = this.nik[index];
 					var valid = false;
 					for (var i = 0; i < this.data_penduduk.length; i++) {
 						if (this.data_penduduk[i].nik.toString().match(nik)) {
@@ -363,17 +312,9 @@ if (mysqli_num_rows($result) > 0) {
 						nik = '';
 					}
 
-					if(ket == 'bapak'){
-						this.data_bapak = data_orang;
-						this.dialog_nik_bapak = false;
-						this.nik_bapak = nik;
-					}else if(ket == 'ibu'){
-						nik = this.nik_ibu;
-					}else{
-						this.data_orang = data_orang;
-						this.dialog_nik = false;
-						this.nik = nik;
-					}
+					this.dialog_nik_ubah(index, false);
+					Vue.set(this.data_orang, index, data_orang);
+					Vue.set(this.nik, index, nik);
 				},
 				ubah: function() {
 					var tmp = this.penghasilan_dari.toString();

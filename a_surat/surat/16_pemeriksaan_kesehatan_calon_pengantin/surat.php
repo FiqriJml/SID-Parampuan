@@ -5,28 +5,18 @@
 
 include($root.'koneksi.php');
 
-$nik = $_GET['nik'];
+$nik_istri = $_GET['nik_istri'];
+$nik_suami = $_GET['nik_suami'];
+
 $tgl = date('Y-m-d');
 
 // Varian Surat
 // yang di ganti untuk setiap surat
-$jenis_surat = 'Surat Keterangan Bepergian';
+$jenis_surat = 'Surat Pemeriksaan Kesehatan Calon Pengantin';
+
 $no_label = "PEL-DK";
-$no_surat = "145";
-$tujuan = $_GET['tujuan'];
-$lamanya = $_GET['lamanya'];
-$tanggal_berangkat = $_GET['tanggal_berangkat'];
-$keperluan = $_GET['keperluan'];
+$no_surat = "472.2";
 $keterangan = $_GET['keterangan'];
-
-$nik_bapak = $_GET['nik_bapak'];
-//ambil data pada bapak
-$query = "SELECT * FROM data_penduduk WHERE nik='$nik_bapak'";
-$result = mysqli_query($con, $query);
-if (mysqli_num_rows($result) > 0) {
-    $data_bapak = mysqli_fetch_assoc($result);
-}
-
 
 // nama file nya
 $file = $nik."_".$jenis_surat."_".$tgl.".pdf";
@@ -49,10 +39,16 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 //ambil data pada database
-$query = "SELECT * FROM data_penduduk WHERE nik='$nik'";
+$query = "SELECT * FROM data_penduduk WHERE nik='$nik_istri'";
 $result = mysqli_query($con, $query);
 if (mysqli_num_rows($result) > 0) {
-    $data_penduduk = mysqli_fetch_assoc($result);
+    $data_istri = mysqli_fetch_assoc($result);
+}
+//ambil data pada database
+$query = "SELECT * FROM data_penduduk WHERE nik='$nik_suami'";
+$result = mysqli_query($con, $query);
+if (mysqli_num_rows($result) > 0) {
+    $data_suami = mysqli_fetch_assoc($result);
 }
 
 //simpan SURAT ke tabel surat
@@ -109,6 +105,7 @@ ob_start();
     .surat{
         /*background-color: pink;*/
         background-color: #fff;
+        font-size: 13px;
     }
     .surat-isi{
         padding: 0cm 1cm;
@@ -183,17 +180,12 @@ ob_start();
     .kop-isi .desa{
         font-size: 22px;
     }
-    /*td{
-        line-height: 95%;
-    }*/
     table {
         border-collapse: none;
     }
-    .table td, .table th {
-        border: solid 1px black;
-        /*line-height: 110%;*/
-        padding: 5px;
-        text-align: center;
+    .judul_surat{
+        font-size: 13px;
+        vertical-align: top;
     }
 </style>
         <div class="surat">
@@ -214,41 +206,64 @@ ob_start();
                     </div>
                 </div>
                 <div class="surat-badan">
-                    <div class="text-center">
-                        <span class="garis_bawah"><b><?= strtoupper($jenis_surat) ?></b></span> <br>
-                        <div style="margin-top: 3px;">
-                        Nomor: <?= $no_surat; ?> / <?= $no_agenda; ?> / <?= $no_label; ?> / 2019<br>
-                        </div>
-                    </div>
+                    <table border="0" class="judul_surat">
+                        <tr>
+                            <td colspan="4" width="12cm"></td>
+                            <td>
+                                <u>Perampuan, <?= $hari_ini;?></u> <br>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nomor</td> <td>:</td> <td><?=$no_surat;?> / <?=$no_agenda;?> / <?=$no_label;?> / 2019</td>
+                            <td rowspan="2">Yth.</td>
+                            <td rowspan="2">Kepala UPT BLUD Puskesmas Perampuan</td>
+                        </tr> 
+                        <tr>
+                            <td>Lamp.</td> <td>:</td> <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Hal</td> <td>:</td> <td>Pemeriksaan Kesehatan Calon Pengantin <br>( Suntik TT ). </td>
+                            <td rowspan="2"></td>
+                            <td rowspan="2">di_ <br>&emsp;&emsp;Labuapi</td>
+                        </tr> 
+                        <tr>
+                            <td colspan="3"></td>
+                        </tr>
+                    </table>
+                     <br>
                     <div class="text-justify">
-                        <p>Yang bertandatangan dibawah ini:</p>
-                        <div class="tabel">
-                            <table>
-                                <tr>
-                                    <td class="label-td">Nama</td> <td>:&emsp;</td> <td><?= $yang_ttd; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Jabatan</td> <td>:</td> <td><?= $jabatan_ttd; ?></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <p>Dengan ini menerangkan bahwa:</p>
+                        <p>&emsp;&emsp;&emsp;&emsp; <b><i>Bismillahirrohmanirrohim,</i></b>
+                                <br>
+                                &emsp;&emsp;&emsp;&emsp; Assalamu’alaikum Warohmatullohi Wabarokaatuh
+                            </p>
+                            <p>&emsp;&emsp;&emsp;&emsp; 
+                                Untuk menindak lanjuti Peraturan Daerah Kabupaten Lombok Barat Pasal 16 Ayat ( 14 ) tentang
+                                pencegahan dan penanggulangan <b><i>Human Immunodeficiency Virus</i></b> dan <b><i>Aquared Imune Defiency
+                                Syndrome</i></b>, dan instruksi Bupati Lombok Barat tentang pemeriksaan kesehatan bagi pasangan calon
+                                pengantin, dengan ini diharapkan dapat dilakukan pemeriksaan kesehatan kepada calon pasangan
+                                pengantin yang identitasnya sebagai berikut : 
+                            </p>
                         <div class="tabel">
                             <table border="0">
                                 <tr>
-                                    <td></td>
-                                    <td class="label-td">Nama</td> <td>:&emsp;</td> <td> <b><?= $data_bapak['nama']; ?></b></td>
+                                    <td width="15px">I.</td>
+                                    <td>Calon Suami</td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>NIK</td> <td>:</td> <td><?= $data_bapak['nik'];?></td>
+                                    <td class="label-td">Nama</td> <td>:&emsp;</td> <td> <b><?= $data_suami['nama']; ?></b></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Tempat/tgl. lahir</td> <td>:</td> <td><?= $data_bapak['tempat']; ?>, <?= $data_bapak['tanggal_lahir']; ?></td>
+                                    <td>NIK</td> <td>:</td> <td><?= $data_suami['nik'];?></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>Tempat/tgl. lahir</td> <td>:</td> <td><?= $data_suami['tempat']; ?>, <?= $data_suami['tanggal_lahir']; ?></td>
                                 </tr>
                                 <?php
-                                    $jenis_kelamin = $data_bapak['jenis_kelamin'];
+                                    $jenis_kelamin = $data_suami['jenis_kelamin'];
                                     if($jenis_kelamin == 'P' || $jenis_kelamin == 'p'){
                                         $jenis_kelamin = 'Perempuan';
                                     }else{
@@ -261,84 +276,80 @@ ob_start();
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Agama</td> <td>:</td> <td><?= $data_bapak['agama']; ?></td>
+                                    <td>Agama</td> <td>:</td> <td><?= $data_suami['agama']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Status</td> <td>:</td> <td><?= $data_bapak['status_perkawinan']; ?></td>
+                                    <td>Status</td> <td>:</td> <td><?= $data_suami['status_perkawinan']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Kewarganegaraan</td> <td>:</td> <td>WNI</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Pendidikan</td> <td>:</td> <td><?= $data_bapak['pendidikan']; ?></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Pekerjaan</td> <td>:</td> <td><?= $data_bapak['pekerjaan']; ?></td>
+                                    <td>Pekerjaan</td> <td>:</td> <td><?= $data_suami['pekerjaan']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td valign="top">Alamat</td> <td valign="top">:</td> 
-                                    <td class="text-justify" valign="top">Dusun <?= $data_bapak['dusun']; ?> Desa <?= $data_bapak['desa']; ?> Kecamatan <?= $data_bapak['kecamatan']; ?> Kabupaten Lombok Barat </td>
+                                    <td class="text-justify" valign="top">Dusun <?= $data_suami['dusun']; ?> Desa <?= $data_suami['desa']; ?> Kecamatan <?= $data_suami['kecamatan']; ?> Kabupaten Lombok Barat </td>
+                                </tr>
+                            </table>
+
+                            <table border="0">
+                                <tr>
+                                    <td width="15px">II.</td>
+                                    <td>Calon Istri</td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Tujuan</td> <td>:</td> <td><?= $tujuan; ?></td>
+                                    <td class="label-td">Nama</td> <td>:&emsp;</td> <td> <b><?= $data_istri['nama']; ?></b></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>lamanya</td> <td>:</td> <td><?= $lamanya; ?></td>
+                                    <td>NIK</td> <td>:</td> <td><?= $data_istri['nik'];?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>tanggal_berangkat</td> <td>:</td> <td><?= $tanggal_berangkat; ?></td>
+                                    <td>Tempat/tgl. lahir</td> <td>:</td> <td><?= $data_istri['tempat']; ?>, <?= $data_istri['tanggal_lahir']; ?></td>
+                                </tr>
+                                <?php
+                                    $jenis_kelamin = $data_istri['jenis_kelamin'];
+                                    if($jenis_kelamin == 'P' || $jenis_kelamin == 'p'){
+                                        $jenis_kelamin = 'Perempuan';
+                                    }else{
+                                        $jenis_kelamin = 'Laki-Laki';
+                                    }
+                                ?>
+                                <tr>
+                                    <td></td>
+                                    <td>Jenis kelamin</td> <td>:</td> <td><?= $jenis_kelamin; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>keperluan</td> <td>:</td> <td><?= $keperluan; ?></td>
+                                    <td>Agama</td> <td>:</td> <td><?= $data_istri['agama']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>keterangan</td> <td>:</td> <td><?= $keterangan; ?></td>
+                                    <td>Status</td> <td>:</td> <td><?= $data_istri['status_perkawinan']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>Pekerjaan</td> <td>:</td> <td><?= $data_istri['pekerjaan']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td valign="top">Alamat</td> <td valign="top">:</td> 
+                                    <td class="text-justify" valign="top">Dusun <?= $data_istri['dusun']; ?> Desa <?= $data_istri['desa']; ?> Kecamatan <?= $data_istri['kecamatan']; ?> Kabupaten Lombok Barat </td>
                                 </tr>
                             </table>
                         </div>  
-                    </div>
-                        <p>&emsp;&emsp;&emsp;Pengikut-pengikut:</p>
-                        <table class="table" width="100%">
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Lengkap</th>
-                                <th>L/P</th>
-                                <th>Hubungan Keluarga</th>
-                                <th>Tempat dan Tanggal Lahir</th>
-                                <th>Ket.</th>
-                            </tr>
-                            <?php $key=-1; foreach ($_GET['nama'] as $key => $nama): ?>
-                            <tr>
-                                <td><?= $key+1 ?></td>
-                                <td><?= $_GET['nama'][$key] ?> </td>
-                                <td><?= $_GET['jenis_kelamin'][$key] ?> </td>
-                                <td><?= $_GET['hubungan_kel'][$key] ?> </td>
-                                <td><?= $_GET['ttl'][$key] ?> </td>
-                                <td><?= $_GET['ket'][$key] ?> </td>
-                            </tr>
-                            <?php endforeach; ?>
-                            <?php for ($i=$key+1; $i < 4; $i++):?>
-                                <tr>
-                                <td><?= $i+1 ?></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            <?php endfor; ?>
 
-                        </table>
+                    </div>
+                    <p>
+                        &emsp;&emsp;&emsp;Demikian pemberitahuan ini kami sampaikan agar dapat dibantu, atas perhatian dan
+kerjasamanya kami ucapkan terima kasih.
+                    </p>
+                    <p>
+                        &emsp;&emsp;&emsp;Wassalamu’alaikum Warohmatullohi Wabarokaatuh.
+                    </p>
                     <br><br>
                     <div class="surat-ttd">
                         Perampuan, <?= $hari_ini ?><br>

@@ -2,7 +2,7 @@
 <?php
 include('../../../koneksi.php');
 
-$judul_surat = "Surat Keterangan Bepergian";
+$judul_surat = "Surat Keterangan Umum Desa";
 
 $query = "SELECT * FROM data_penduduk order by id desc";
 $result = mysqli_query($con, $query);
@@ -108,9 +108,21 @@ if (mysqli_num_rows($result) > 0) {
 								</i> <br> -->
 								<form action="surat.php" target="_blank" method="GET" class="form-horizontal" enctype="multipart/form-data">
 									<div class="form-group">
+										<label class="col-sm-2 control-label">No Surat</label>
+										<div class="col-sm-5">
+											<input type="text" name="no_surat" class="form-control" v-model="no_surat">
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-sm-2 control-label">No Agenda</label>
 										<div class="col-sm-5">
 											<input type="text" name="no_agenda" class="form-control" v-model="no_agenda">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Surat Keterangan</label>
+										<div class="col-sm-5">
+											<input type="text" name="nama_surat" class="form-control" v-model="nama_surat">
 										</div>
 									</div>
 									<div class="form-group">
@@ -150,33 +162,15 @@ if (mysqli_num_rows($result) > 0) {
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">Tujuan</label>
-										<div class="col-sm-5">
-											<input type="text" name="tujuan" class="form-control" v-model="tujuan">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Lamanya</label>
-										<div class="col-sm-5">
-											<input type="text" name="lamanya" class="form-control" v-model="lamanya">
-										</div>
-									</div>
-									<div class="form-group">
 										<label class="col-sm-2 control-label">Untuk Keperluan</label>
 										<div class="col-sm-5">
 											<input type="text" name="keperluan" class="form-control" v-model="keperluan">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">Tanggal Berangkat</label>
-										<div class="col-sm-5">
-											<input type="text" name="tanggal_berangkat" class="form-control" v-model="tanggal_berangkat">
-										</div>
-									</div>
-									<div class="form-group">
 										<label class="col-sm-2 control-label">Keterangan</label>
 										<div class="col-sm-5">
-											<input type="text" name="keterangan" class="form-control" v-model="keterangan">
+											<textarea rows="6" type="text" name="keterangan" class="form-control" v-model="keterangan"> </textarea>
 										</div>
 									</div>
 
@@ -195,58 +189,6 @@ if (mysqli_num_rows($result) > 0) {
 											<input type="text" name="yang_ttd" class="form-control" v-model="yang_ttd" readonly="">
 										</div>
 									</div>
-
-									<div class="form-group">
-										<label class="col-sm-2 control-label"></label>
-										<div class="col-sm-5">
-											<h2 class="">Pengikut</h2>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Jumlah Pengikut</label>
-										<div class="col-sm-1">
-											<input type="number" v-model="jml_pasukan" class="form-control">
-										</div>
-									</div>
-									<template v-for="i in parseInt(jml_pasukan)">
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Pengikut {{i}}</label>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Nama</label>
-											<div class="col-sm-5">
-												<input type="text" name="nama[]" class="form-control">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Jenis Kelamin</label>
-											<div class="col-sm-5">
-												<select type="text" name="jenis_kelamin[]" class="form-control">
-													<option value="-">Jenis Kelamin</option>
-													<option value="L">Laki-laki</option>
-													<option value="P">Perempuan</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Hubungan Keluarga</label>
-											<div class="col-sm-5">
-												<input type="text" name="hubungan_kel[]" class="form-control">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">TTL</label>
-											<div class="col-sm-5">
-												<input type="text" name="ttl[]" class="form-control">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Keterangan</label>
-											<div class="col-sm-5">
-												<input type="text" name="ket[]" class="form-control">
-											</div>
-										</div>
-									</template>
 
 									<div class="form-group">
 										<div class="col-sm-2 col-sm-offset-4">
@@ -275,12 +217,14 @@ if (mysqli_num_rows($result) > 0) {
 			el: '#app',
 			data: {
 				// cata yang beda tiap surat
+				nama_surat: 'Umum',
+				no_surat: 201,
 				tujuan: 'Provinsi Sulawesi Selatan',
 				lamanya: '1 Tahun',
 				tanggal_berangkat: '10 September 2020',
 
 				keperluan: 'Bekerja',
-				keterangan: 'Bahwa yang bersangkutan sepengetahuan kami memang benar Menunjukkan sikap dan tingkah laku yang baik',
+				keterangan: `telah kehilangan Satu lembar KARTU KELUARGA (KK) NO : 5201081008120008 atas nama almarhum suaminya ZAETUN yang menurut keterangan pelapor bahwa KARTU KELUARGA (KK) tersebut hilang saat pindah rumah pada bulan April 2019 yg lalu`,
 
 				// jumlah pasukan
 				jml_pasukan: 1,

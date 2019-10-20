@@ -10,9 +10,12 @@ $tgl = date('Y-m-d');
 
 // Varian Surat
 // yang di ganti untuk setiap surat
-$jenis_surat = 'Surat Keterangan Bepergian';
-$no_label = "PEL-DK";
-$no_surat = "145";
+
+$nama_surat = $_GET['nama_surat'];
+
+$jenis_surat = "Surat Keterangan ".$nama_surat;
+$no_label = "PEM-LA";
+$no_surat = $_GET['no_surat'];
 $tujuan = $_GET['tujuan'];
 $lamanya = $_GET['lamanya'];
 $tanggal_berangkat = $_GET['tanggal_berangkat'];
@@ -237,108 +240,45 @@ ob_start();
                             <table border="0">
                                 <tr>
                                     <td></td>
-                                    <td class="label-td">Nama</td> <td>:&emsp;</td> <td> <b><?= $data_bapak['nama']; ?></b></td>
+                                    <td class="label-td">Nama</td> <td>:&emsp;</td> <td> <b><?= $_GET['oNama']; ?></b></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>NIK</td> <td>:</td> <td><?= $data_bapak['nik'];?></td>
+                                    <td>NIK</td> <td>:</td> <td><?= $_GET['oNik'];?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Tempat/tgl. lahir</td> <td>:</td> <td><?= $data_bapak['tempat']; ?>, <?= $data_bapak['tanggal_lahir']; ?></td>
-                                </tr>
-                                <?php
-                                    $jenis_kelamin = $data_bapak['jenis_kelamin'];
-                                    if($jenis_kelamin == 'P' || $jenis_kelamin == 'p'){
-                                        $jenis_kelamin = 'Perempuan';
-                                    }else{
-                                        $jenis_kelamin = 'Laki-Laki';
-                                    }
-                                ?>
-                                <tr>
-                                    <td></td>
-                                    <td>Jenis kelamin</td> <td>:</td> <td><?= $jenis_kelamin; ?></td>
+                                    <td>Tempat/tgl. lahir</td> <td>:</td> <td><?= $_GET['oTtl']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Agama</td> <td>:</td> <td><?= $data_bapak['agama']; ?></td>
+                                    <td>Jenis kelamin</td> <td>:</td> <td><?= $_GET['oJenis_kelamin']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Status</td> <td>:</td> <td><?= $data_bapak['status_perkawinan']; ?></td>
+                                    <td>Agama</td> <td>:</td> <td><?= $_GET['oAgama']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Kewarganegaraan</td> <td>:</td> <td>WNI</td>
+                                    <td>Status</td> <td>:</td> <td><?= $_GET['oStatus']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Pendidikan</td> <td>:</td> <td><?= $data_bapak['pendidikan']; ?></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Pekerjaan</td> <td>:</td> <td><?= $data_bapak['pekerjaan']; ?></td>
+                                    <td>Pekerjaan</td> <td>:</td> <td><?= $_GET['oPekerjaan']; ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td valign="top">Alamat</td> <td valign="top">:</td> 
-                                    <td class="text-justify" valign="top">Dusun <?= $data_bapak['dusun']; ?> Desa <?= $data_bapak['desa']; ?> Kecamatan <?= $data_bapak['kecamatan']; ?> Kabupaten Lombok Barat </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Tujuan</td> <td>:</td> <td><?= $tujuan; ?></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>lamanya</td> <td>:</td> <td><?= $lamanya; ?></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>tanggal_berangkat</td> <td>:</td> <td><?= $tanggal_berangkat; ?></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>keperluan</td> <td>:</td> <td><?= $keperluan; ?></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>keterangan</td> <td>:</td> <td><?= $keterangan; ?></td>
+                                    <td class="text-justify" valign="top">Dusun <?= $_GET['oAlamat']; ?>.</td>
                                 </tr>
                             </table>
-                        </div>  
+                        </div> 
+                        <p>
+                            &emsp;&emsp;&emsp;&emsp;Bahwa yang namanya tersebut diatas memang benar <?= $keterangan;?>.
+                        </p> 
+                        <p>&emsp;&emsp;&emsp;&emsp;Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana
+mestinya.</p>
                     </div>
-                        <p>&emsp;&emsp;&emsp;Pengikut-pengikut:</p>
-                        <table class="table" width="100%">
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Lengkap</th>
-                                <th>L/P</th>
-                                <th>Hubungan Keluarga</th>
-                                <th>Tempat dan Tanggal Lahir</th>
-                                <th>Ket.</th>
-                            </tr>
-                            <?php $key=-1; foreach ($_GET['nama'] as $key => $nama): ?>
-                            <tr>
-                                <td><?= $key+1 ?></td>
-                                <td><?= $_GET['nama'][$key] ?> </td>
-                                <td><?= $_GET['jenis_kelamin'][$key] ?> </td>
-                                <td><?= $_GET['hubungan_kel'][$key] ?> </td>
-                                <td><?= $_GET['ttl'][$key] ?> </td>
-                                <td><?= $_GET['ket'][$key] ?> </td>
-                            </tr>
-                            <?php endforeach; ?>
-                            <?php for ($i=$key+1; $i < 4; $i++):?>
-                                <tr>
-                                <td><?= $i+1 ?></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            <?php endfor; ?>
-
-                        </table>
                     <br><br>
                     <div class="surat-ttd">
                         Perampuan, <?= $hari_ini ?><br>

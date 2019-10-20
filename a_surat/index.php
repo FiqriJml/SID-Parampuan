@@ -106,12 +106,21 @@
                                 <a href="surat/15_keterangan_penghasilan_orang_tua" class="btn btn-info m-r-sm">Surat Keterangan Penghasilan Orang Tua</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-warning m-r-sm">Surat Keterangan Duda</a>
+                                <a href="surat/16_pemeriksaan_kesehatan_calon_pengantin" class="btn btn-danger m-r-sm">Surat Pemeriksaan <br>Kesehatan Calon Pengantin</a>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <a href="surat/17_keterangan_harga_tanah" class="btn btn-danger m-r-sm">Surat Keterangan Harga Tanah</a>
+                            </td>
+                            <td>
+                                <a href="surat/18_keterangan_umum_desa" class="btn btn-info m-r-sm"> Surat Keterangan Umum Desa</a>
+                            </td>
+                            <td>
+                                <a href="surat/19_keterangan_umum_luar_desa" class="btn btn-info m-r-sm"> Surat Keterangan Umum Luar Desa</a>
+                            </td>
+                            <td>
+                                <a href="surat/20_keterangan_pemilikan" class="btn btn-info m-r-sm"> Surat Keterangan Pemilikan</a>
                             </td>
                         </tr>
                         </tbody>
