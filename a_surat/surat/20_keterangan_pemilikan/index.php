@@ -2,7 +2,7 @@
 <?php
 include('../../../koneksi.php');
 
-$judul_surat = "Surat Keterangan Bepergian";
+$judul_surat = "Surat Keterangan Pemilikan";
 
 $query = "SELECT * FROM data_penduduk order by id desc";
 $result = mysqli_query($con, $query);
@@ -149,37 +149,57 @@ if (mysqli_num_rows($result) > 0) {
 
 										</div>
 									</div>
+
 									<div class="form-group">
-										<label class="col-sm-2 control-label">Tujuan</label>
+										<label class="col-sm-2 control-label">Keterangan 1</label>
 										<div class="col-sm-5">
-											<input type="text" name="tujuan" class="form-control" v-model="tujuan">
+											<textarea rows="5" type="text" name="keterangan" class="form-control" v-model="keterangan"> </textarea>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">Lamanya</label>
+										<label class="col-sm-2 control-label">Keterangan 2</label>
 										<div class="col-sm-5">
-											<input type="text" name="lamanya" class="form-control" v-model="lamanya">
+											<textarea rows="6" type="text" name="keterangan2" class="form-control" v-model="keterangan2"> </textarea>
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Keterangan 3</label>
+										<div class="col-sm-5">
+											<textarea rows="7" type="text" name="keterangan3" class="form-control" v-model="keterangan3"> </textarea>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Batas Sebelah Utara</label>
+										<div class="col-sm-5">
+											<input type="text" name="sebelah_utara" class="form-control" v-model="sebelah_utara">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Batas Sebelah Timur</label>
+										<div class="col-sm-5">
+											<input type="text" name="sebelah_timur" class="form-control" v-model="sebelah_timur">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Batas Sebelah Selatan</label>
+										<div class="col-sm-5">
+											<input type="text" name="sebelah_selatan" class="form-control" v-model="sebelah_selatan">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Batas Sebelah Barat</label>
+										<div class="col-sm-5">
+											<input type="text" name="sebelah_barat" class="form-control" v-model="sebelah_barat">
+										</div>
+									</div>
+
 									<div class="form-group">
 										<label class="col-sm-2 control-label">Untuk Keperluan</label>
 										<div class="col-sm-5">
 											<input type="text" name="keperluan" class="form-control" v-model="keperluan">
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Tanggal Berangkat</label>
-										<div class="col-sm-5">
-											<input type="text" name="tanggal_berangkat" class="form-control" v-model="tanggal_berangkat">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Keterangan</label>
-										<div class="col-sm-5">
-											<input type="text" name="keterangan" class="form-control" v-model="keterangan">
-										</div>
-									</div>
-
 									<div class="form-group">
 										<label class="col-sm-2 control-label">Yang Bertandatangan</label>
 										<div class="col-sm-5">
@@ -195,58 +215,6 @@ if (mysqli_num_rows($result) > 0) {
 											<input type="text" name="yang_ttd" class="form-control" v-model="yang_ttd" readonly="">
 										</div>
 									</div>
-
-									<div class="form-group">
-										<label class="col-sm-2 control-label"></label>
-										<div class="col-sm-5">
-											<h2 class="">Pengikut</h2>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Jumlah Pengikut</label>
-										<div class="col-sm-1">
-											<input type="number" v-model="jml_pasukan" class="form-control">
-										</div>
-									</div>
-									<template v-for="i in parseInt(jml_pasukan)">
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Pengikut {{i}}</label>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Nama</label>
-											<div class="col-sm-5">
-												<input type="text" name="nama[]" class="form-control">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Jenis Kelamin</label>
-											<div class="col-sm-5">
-												<select type="text" name="jenis_kelamin[]" class="form-control">
-													<option value="-">Jenis Kelamin</option>
-													<option value="L">Laki-laki</option>
-													<option value="P">Perempuan</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Hubungan Keluarga</label>
-											<div class="col-sm-5">
-												<input type="text" name="hubungan_kel[]" class="form-control">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">TTL</label>
-											<div class="col-sm-5">
-												<input type="text" name="ttl[]" class="form-control">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Keterangan</label>
-											<div class="col-sm-5">
-												<input type="text" name="ket[]" class="form-control">
-											</div>
-										</div>
-									</template>
 
 									<div class="form-group">
 										<div class="col-sm-2 col-sm-offset-4">
@@ -280,7 +248,14 @@ if (mysqli_num_rows($result) > 0) {
 				tanggal_berangkat: '10 September 2020',
 
 				keperluan: 'Bekerja',
-				keterangan: 'Bahwa yang bersangkutan sepengetahuan kami memang benar Menunjukkan sikap dan tingkah laku yang baik',
+				keterangan: 'sebidang Tanah Pekarangan seluas kurang lebih 266 M2 (meter persegi) SPPT Noomor 004-0176.0 yang terletak di Dusun Kerepet, Desa Perampuan, Kecamatan Labuapi, Lombok Barat dengan batas-batas sebagai berikut :',
+				keterangan2: 'Selanjutnya tanah pekarangan tersebut berasal dari Warisan dengan seorang bernama Amaq Sane, Pekerjaan Tani, alamat Dusun Kerepet, Desa Perampuan. Adapun perolehan tanah tersebut menurut pengakuan yang bersangkutan terjadi pada tahun 1986 dimana surat-suratnya sudah tidak diketemukan lagi',
+				keterangan3: 'Sebagai bahan pertimbangan selanjutnya dikemukakan bahwa diatas tanah tersebut telah berdiri sebuah bangunan semi permanen milik yang bersangkutan dan sejak tahun 1986 hingga saat sekarang ini masih tetap dikuasai dan dimiliki serta dimanfaatkan oleh yang bersangkutan untuk Perumahan tempat tinggal serta pihak lain tidak ada yang berkeberatan/tidak dalam keadaan sengketa',
+				
+				sebelah_utara: 'Sahdi',
+				sebelah_timur: 'Jumaah',
+				sebelah_selatan: 'Nuraman',
+				sebelah_barat: 'Jalan/Gang',
 
 				// jumlah pasukan
 				jml_pasukan: 1,
